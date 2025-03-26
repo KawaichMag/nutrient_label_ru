@@ -10,13 +10,11 @@ from reportlab.lib.enums import TA_CENTER
 import os
 
 BASE_HEIGHT = 132
-BASE_WIDTH = 76
+BASE_WIDTH = 72
 
 BASE_WIDTH_WITH_MARGIN = BASE_WIDTH + 4
 ADJUSTED_FIRST_COLUMN_WIDTH = BASE_WIDTH * 0.67
 ADJUSTED_SECOND_COLUMN_WIDTH = BASE_WIDTH * 0.33
-
-
 
 HL_BOLD_WIDTH = 4
 HL_THICK_WIDTH = 2
@@ -97,16 +95,13 @@ def create_nutrition_facts(
         '''
         Calculate the percentage of the daily recommended value
         '''
-        if name == 'vitamin_d':
-            # Convert IU to mcg for calculation (1 mcg = 40 IU)
-            value = float(value) / 40 if value else 0
         return f'{int(((float(value) if value else 0) / daily_values[name]) * 100)}%'
     
     # Define data for the table
     data = [
         [f'Размер порции', f'{serving_size}'],
         [f'Калории', f'{calories}'],
-        ['', '% Дневной нормы*'],
+        ['', '% Дневной Нормы*'],
         [f'Всего жиров {total_fat}г', cp('total_fat', total_fat)],
         [f' Насыщенные жиры {saturated_fat}г', cp('saturated_fat', saturated_fat)],
         [f' Транс-жиры {trans_fat}г', ''],
@@ -130,7 +125,7 @@ def create_nutrition_facts(
     style = TableStyle([
         ('FONT', (0, 0), (-1, -1), 'DejaVuSans'),
         ('FONTSIZE', (0, 0), (-1, -1), 8),
-        ('FONTSIZE', (0, 0), (1, 0), 14), # Serving size
+        ('FONTSIZE', (0, 0), (1, 0), 12), # Serving size
         ('FONTSIZE', (0, 1), (1, 1), 20), # Calories
         ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
         ('ALIGN', (1, 0), (1, -1), 'RIGHT'),
@@ -141,7 +136,7 @@ def create_nutrition_facts(
         ('LINEBELOW', (0, 16), (1, 16), HL_THICK_WIDTH, colors.black),  # After calcium
         ('BOTTOMPADDING', (0, 1), (-1, -1), 2),
         ('TOPPADDING', (0, 1), (-1, -1), 2),
-        ('BOTTOMPADDING', (0, 0), (1, 0), 10), # For serving size
+        ('BOTTOMPADDING', (0, 0), (1, 0), 8), # For serving size
         ('BOTTOMPADDING', (0, 1), (1, 1), 16), # For calories
         ('BOTTOMPADDING', (0, 12), (1, 12), 4), # For protein
         ('TOPPADDING', (0, 13), (1, 13), 5),

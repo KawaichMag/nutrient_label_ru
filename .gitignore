@@ -1,1 +1,6 @@
 /venv
+/src/__pycache__
+/src/temp
+/src/label.pdf
+/src/index.html
+/src/server.py
